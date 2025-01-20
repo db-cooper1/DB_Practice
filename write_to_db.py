@@ -1,7 +1,7 @@
 import sqlite3
 from faker import Faker
 import random
-fake = Faker("EN_IN")
+fake = Faker("en_GB")
 
 conn = sqlite3.connect('students.sqlite')
 
@@ -33,12 +33,9 @@ cursor = conn.cursor()
 
 fake.random.seed(4321)
 random.seed(4321)
-for _ in range(10):
-    f_name = fake.first_name()
-    l_name = fake.last_name()
-    age = random.randint(11, 18)
-    gender = random.choice(['male', 'female'])
-    cursor.execute(parameterised_insert_query, (f_name, l_name, age, gender))
+for _ in range(100):
+        f=fake.profile()
+        cursor.execute(parameterised_insert_query, [*f['name'].split(' ')[-2:], random.randint(11,18), f['sex']])
 
 conn.commit()
 conn.close()
