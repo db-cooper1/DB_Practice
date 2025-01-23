@@ -16,15 +16,13 @@ select_users = "SELECT * from users"
 with sqlite3.connect("sm_app.sqlite") as conn:
     users = execute_read_query(conn, select_users)
 
-for user in users:
-    print(user)
+print(tabulate(users))
 
 select_posts = "SELECT * FROM posts"
 with sqlite3.connect("sm_app.sqlite") as conn:
     posts = execute_read_query(conn, select_posts)
 
-for post in posts:
-    print(post)
+print(tabulate(posts))
 
 select_users_posts = """
 SELECT
@@ -38,8 +36,7 @@ INNER JOIN users ON users.id = posts.user_id
 
 
 users_posts = execute_read_query(conn, select_users_posts)
-for users_post in users_posts:
-    print(users_post)
+print(tabulate(users_posts))
 
 select_posts_comments_users = """
 SELECT
@@ -53,14 +50,14 @@ with sqlite3.connect("sm_app.sqlite") as conn:
     posts_comments_users = execute_read_query(conn, select_posts_comments_users)
 
 
-for posts_comments_user in posts_comments_users:
-    print(posts_comments_user)
+
 
 cursor = conn.cursor()
 cursor.execute(select_posts_comments_users)
 cursor.fetchall()
 column_names = [description[0] for description in cursor.description]
-print(column_names)
+
+print(tabulate(posts_comments_users, headers=column_names))
 
 select_post_likes = """
 
@@ -76,5 +73,4 @@ likes.post_id
 
 post_likes = execute_read_query(conn, select_post_likes)
 
-for post_like in post_likes:
-    print(post_like)
+print(tabulate(post_likes))
