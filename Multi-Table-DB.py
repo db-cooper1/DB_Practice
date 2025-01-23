@@ -42,5 +42,8 @@ CREATE TABLE IF NOT EXISTS comments (
 with sqlite3.connect("sm_app.sqlite") as conn:
     cursor = conn.cursor()
     cursor.execute(create_users_table)
+    cursor.execute(create_posts_table)
+    cursor.execute(create_likes_table)
+    cursor.execute(create_comments_table)
 
 conn.commit()
