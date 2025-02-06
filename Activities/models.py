@@ -25,6 +25,7 @@ class Activity(Base):
     __tablename__ = 'activities'
     id: so.Mapped[int] = so.mapped_column(primary_key=True, autoincrement=True)
     name: so.Mapped[str] = so.mapped_column(unique=True)
+    location_id: so.Mapped[Optional[int]] = so.mapped_column(sa.ForeignKey('locations.id'))
     location: so.Mapped['Location'] = so.relationship(back_populates="activities")
     attendees: so.Mapped[list["Person"]] = so.relationship("Person",
                                                            secondary=person_activities,
@@ -58,9 +59,9 @@ class Person(Base):
 
 class Location(Base):
     __tablename__ = 'location'
-    location_id: so.Mapped[Optional[int]] = so.mapped_column(sa.ForeignKey('locations.id'))
+    id: so.Mapped[int] = so.mapped_column(primary_key=True, autoincrement=True)
     room: so.Mapped[str]
     activities: so.Mapped[list["Activity"]] = so.relationship(back_populates="location")
 
     def __repr__(self):
-        return f"Location(location={self.location})"
+        return f"Location(location={self.room})"
