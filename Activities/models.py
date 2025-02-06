@@ -10,6 +10,7 @@ class Base(so.DeclarativeBase):
 # Base.metadata is a container object that keeps together many different features of the database.
 # Note that this table is created in the sqlalchemy layer, not in sqlalchemy.orm - it will therefore
 # not be usable as a python object using the sqlalchemy ORM
+
 person_activities = sa.Table('person_activities',
                            Base.metadata,
                            sa.Column('id', sa.Integer, primary_key=True),
@@ -21,6 +22,7 @@ person_activities = sa.Table('person_activities',
 # Sets up an Activity table, this references "attendees" via the person_activities table.
 # Note that we use the 'new' SQLalchemy 2.0 method of creating columns mapped to python object attributes
 # The column types are set using type hints and additional features can be added with so.mapped_column
+
 class Activity(Base):
     __tablename__ = 'activities'
     id: so.Mapped[int] = so.mapped_column(primary_key=True, autoincrement=True)
@@ -33,12 +35,14 @@ class Activity(Base):
                                                            back_populates="activities")
 
     # Gives a representation of an Activity (for printing out)
+
     def __repr__(self) -> str:
         return f"Activity(name='{self.name}')"
 
 # Sets up a Person table, this references "activities" via the person_activities table.
 # In this case we allow the first_name to be optional, so it may be Null in the database table.
 # first_name and last_name do not have additional column requirements, so the type hint is sufficient
+
 class Person(Base):
     __tablename__ = 'persons'
     id: so.Mapped[int] = so.mapped_column(primary_key=True, autoincrement=True)
@@ -58,7 +62,7 @@ class Person(Base):
         print(f'{self.first_name} says "hello"!')
 
 class Location(Base):
-    __tablename__ = 'location'
+    __tablename__ = 'locations'
     id: so.Mapped[int] = so.mapped_column(primary_key=True, autoincrement=True)
     room: so.Mapped[str]
     activities: so.Mapped[list["Activity"]] = so.relationship(back_populates="location")
