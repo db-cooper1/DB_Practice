@@ -65,3 +65,8 @@ posts[3].comments.append(comments[4])
 session.add_all(comments)
 session.commit()
 
+#If you want to add through the console:
+#Adam = User(name = "Adam", age = 17, gender = "Male", nationality = "British")
+#users.append(Adam)
+#session.add(Adam)
+#session.commit()
