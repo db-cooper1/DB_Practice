@@ -20,3 +20,5 @@ for post in posts:
 comments = session.scalars(sa.select(Comment)).all()
 for comment in comments:
     print(comment)
+
+# when you have the structure for a controller (gui or cli) do integration testing instead of unit testing
