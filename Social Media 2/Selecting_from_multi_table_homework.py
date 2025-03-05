@@ -20,11 +20,11 @@ comments = cursor.fetchall()
 for comment in comments:
     print(comment)
 
-# 2. Change Elizabeth’s name to Lizzy
+# Change Elizabeth’s name to Lizzy
 cursor.execute("UPDATE users SET name = 'Lizzy' WHERE name = 'Elizabeth';")
 conn.commit()
 
-# 3. Show the names of users and the number of posts they have written
+# Show the names of users and the number of posts they have written
 cursor.execute("""
     SELECT user.name, COUNT(post.id) AS post_count
     FROM users user
@@ -35,7 +35,7 @@ user_posts = cursor.fetchall()
 for user, post_count in user_posts:
     print(f"User: {user}, Posts: {post_count}")
 
-# 4. Show the names of users and each of the comments that they have written
+# Show the names of users and each of the comments that they have written
 cursor.execute("""
     SELECT user.name, comment.comment
     FROM users user
@@ -44,7 +44,5 @@ cursor.execute("""
 user_comments = cursor.fetchall()
 for user, comment in user_comments:
     print(f"User: {user}, Comment: {comment}")
-
-# Close the connection
 conn.close()
 
