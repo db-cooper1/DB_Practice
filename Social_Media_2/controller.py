@@ -63,3 +63,8 @@ class CLI:
         user_name = pyip.inputStr('Username: ', blockRegexes=existing_users, strip = None)
         age = pyip.inputInt('Age: ', min = 0, max = 150, blank = True)
         gender = pyip.inputMenu(['male', 'female', 'other'], prompt = 'Gender: ', blank = True)
+
+
+if __name__ == '__main__':
+    cli = CLI()
+    controller = Controller()
