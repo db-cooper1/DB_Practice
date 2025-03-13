@@ -1,9 +1,9 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-
-from model_sm import User, Post, Comment
-
 import pyinputplus as pyip
+
+from Social_Media_2.model_sm import User, Post, Comment
+
 
 class Controller:
     def __init__(self, db_location = 'sqlite:///social_media.db'):

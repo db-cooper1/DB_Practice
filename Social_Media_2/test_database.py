@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from Social_Media_2.write_sm_db import write_initial_data
 from Social_Media_2.controller import Controller
-from model_sm import User, Post, Comment, Base
+from Social_Media_2.model_sm import User, Post, Comment, Base
 
 test_db_location = 'sqlite:///test_database.db'
 
